@@ -86,8 +86,8 @@
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home</a></span> <span>Checkout</span></p>
-              <h1 class="mb-0 bread">Checkout</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home</a></span> <span>Cart</span></p>
+              <h1 class="mb-0 bread">Order Summary</h1>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
         <!-- Cart Summary -->
         <div class="col-md-6">
           <div class="cart-summary p-4 rounded shadow-sm bg-white">
-            <h3 class="cart-summary-title text-center mb-4">Your Cart</h3>
+            <h3 class="cart-summary-title text-center font-weight-bold mb-4">YOUR CART</h3>
             <ul class="list-group mb-3">
               {% for item in cart_items %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -117,40 +117,313 @@
         </div>
 
         <!-- Payment Method -->
-        <div class="col-md-6">
-          <div class="cart-detail bg-light p-4 rounded shadow-sm">
-            <h3 class="billing-heading mb-4">Payment Method</h3>
-            <div class="form-group">
-              <div class="radio">
-                <label><input type="radio" name="optradio" class="mr-2"> Direct Bank Transfer</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="radio">
-                <label><input type="radio" name="optradio" class="mr-2"> UPI Payment</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="radio">
-                <label><input type="radio" name="optradio" class="mr-2"> PayPal</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="radio">
-                <label><input type="radio" name="optradio" class="mr-2"> Cash On Delivery</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="checkbox">
-                <label><input type="checkbox" class="mr-2"> I have read and accept the terms and conditions</label>
-              </div>
-            </div>
-            <p><a href="#" class="btn btn-primary py-3 px-4" data-toggle="modal" data-target="#orderConfirmationModal">Place Order</a></p>
-          </div>
-        </div>
+<!-- Payment Method -->
+<div class="col-md-6">
+  <div class="cart-detail bg-light p-5 rounded shadow-sm">
+    <h3 class="billing-heading mb-4 text-center">Payment Method</h3>
+    <div class="form-group">
+      <div class="radio custom-radio">
+        <input type="radio" id="bank-transfer" name="payment-method" class="mr-2">
+        <label for="bank-transfer" class="custom-radio-label">Direct Bank Transfer</label>
       </div>
     </div>
+    <div class="form-group">
+      <div class="radio custom-radio">
+        <input type="radio" id="upi-payment" name="payment-method" class="mr-2">
+        <label for="upi-payment" class="custom-radio-label">UPI Payment</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="radio custom-radio">
+        <input type="radio" id="paypal" name="payment-method" class="mr-2">
+        <label for="paypal" class="custom-radio-label">PayPal</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="radio custom-radio">
+        <input type="radio" id="cod" name="payment-method" class="mr-2">
+        <label for="cod" class="custom-radio-label">Cash On Delivery</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="checkbox">
+        <input type="checkbox" id="terms" class="mr-2">
+        <label for="terms">I have read and accept the terms and conditions</label>
+      </div>
+    </div>
+    <p class="text-center">
+      <a href="#" class="btn btn-primary py-3 px-4" data-toggle="modal" data-target="#orderConfirmationModal">Place Order</a>
+    </p>
+  </div>
+</div>
+
+            </div>
+           
+          </div>
+        
+      
+   
 </section>
+
+<style>
+  /* Styling the entire payment method section */
+.cart-detail {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cart-detail:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Adding custom styles to the radio button labels */
+.custom-radio input {
+  display: none;
+}
+
+.custom-radio label {
+  position: relative;
+  padding-left: 35px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.custom-radio label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  background-color: #fff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-radio input:checked + label:before {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.custom-radio input:checked + label {
+  font-weight: bold;
+}
+
+/* Styling the checkbox */
+.checkbox input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.checkbox label {
+  font-size: 14px;
+  color: #666;
+}
+
+.checkbox input[type="checkbox"]:checked + label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Button styling */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Add some spacing between payment method options */
+.form-group {
+  margin-bottom: 20px;
+}
+</style>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="orderConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="orderConfirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+  <!-- Cart Van Design -->
+  <div class="cart-van-header">
+    <div class="van-header-title">Your Order is on its Way!</div>
+  </div>
+  <div class="cart-van-body">
+    <div class="cart-van-image">
+        <div class="smoke-wheel left-wheel-smoke"></div> <!-- Left Wheel Smoke -->
+        <div class="smoke-wheel right-wheel-smoke"></div> <!-- Right Wheel Smoke -->
+        <img src="{% static 'images/cart-van.png' %}" alt="Cart Van" class="img-fluid animated-van">
+    </div>
+    <div class="cart-van-content">
+        <p>Your order has been successfully placed. We’re preparing your items for delivery. Thank you for shopping with us!</p>
+    </div>
+    <div class="cart-van-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+        <a href="{% url 'shop' %}">
+            <button type="button" class="btn btn-secondary">Shop Again</button>
+        </a>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  <!-- Styles for Cart Van Modal -->
+  <style>
+  /* Modal Header */
+  .cart-van-header {
+  background: linear-gradient(to right, #ffdc8a, #8e44ad); /* Soft purple gradient */
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px 10px 0 0;
+  color: white;
+  font-size: 1.8rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Modal Body */
+  .cart-van-body {
+  padding: 20px;
+  text-align: center;
+  background-color: #f7edd5; /* Light purple background */
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out 1s forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto; /* Make sure the height adjusts based on content */
+  max-height: none; /* Remove the max-height restriction */
+  overflow: visible; /* Ensure content is visible */
+  }
+  
+  /* Cart Van Image Container */
+  .cart-van-image {
+  position: relative;
+  margin-bottom: 20px;
+  display: inline-block;
+  }
+  
+  /* Cart Van Image */
+  .cart-van-image img {
+  width: 60%;
+  max-width: 300px;
+  margin-bottom: 20px;
+  animation: vanRun 4s ease-in-out forwards;
+  }
+  
+  /* Smoke Effect on Wheels */
+  .smoke-wheel {
+  position: absolute;
+  bottom: 15px;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+  filter: blur(8px);
+  opacity: 0.9;
+  animation: wheelSmoke 3s ease-in-out infinite;
+  }
+  
+  /* Left and Right Wheel Smoke */
+  .left-wheel-smoke {
+  left: 20%;
+  animation-delay: 0.5s;
+  }
+  
+  .right-wheel-smoke {
+  right: 20%;
+  animation-delay: 1s;
+  }
+  
+  /* Smoke Animation */
+  @keyframes wheelSmoke {
+  0% {
+  transform: translateY(0) scale(1);
+  opacity: 0.9;
+  }
+  50% {
+  transform: translateY(-30px) scale(1.3);
+  opacity: 0.5;
+  }
+  100% {
+  transform: translateY(0) scale(1);
+  opacity: 0.9;
+  }
+  }
+  
+  /* Modal Content */
+  .cart-van-content {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #000000; /* Dark purple text for better readability */
+  }
+  
+  /* Modal Footer Button */
+  .cart-van-footer {
+  text-align: center;
+  margin-top: 20px;
+  }
+  
+  .cart-van-footer .btn {
+  background-color: #fad170; /* Matching button color */
+  color: rgb(0, 0, 0);
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+  }
+  
+  .cart-van-footer .btn:hover {
+  background-color: #ffecbf; /* Slightly lighter purple on hover */
+  color: #000000;
+  }
+  
+  /* Running van animation */
+  @keyframes vanRun {
+  0% {
+  transform: translateX(-150%) scale(1);
+  }
+  50% {
+  transform: translateX(100%) scale(1.1);
+  }
+  100% {
+  transform: translateX(300%) scale(1);
+  }
+  }
+  
+  /* Fade-in effect for the modal content */
+  @keyframes fadeIn {
+  from {
+  opacity: 0;
+  }
+  to {
+  opacity: 1;
+  }
+  }
+  
+  .animated-van {
+  animation: vanRun 4s ease-in-out forwards;
+  }
+  </style>
+
+
+
 
 
 <!-- footer section -->
