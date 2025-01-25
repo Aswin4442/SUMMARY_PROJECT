@@ -1,0 +1,222 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ thing.name }} - Details</title>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="container">
+            <div class="product-wrapper">
+                <div class="product-images">
+                    {% if thing.image %}
+                    <img src="{{ thing.image.url }}" alt="{{ thing.name }}" width="400">
+                    {% endif %}
+                </div>
+                <div class="product-content">
+                    <h1 class="product-title">{{ thing.name }}</h1>
+                    <p class="product-description">{{ thing.description }}</p>
+                    <h3>Features: {{ thing.features.display }}</h3>
+                    <ul class="product-features">
+                        {% for feature in thing.features %}
+                            <li>{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="product-price">
+                        <h3>Price: ${{ thing.price }}</h3>
+                    </div>
+                    <div class="purchase-info">
+                        <button class="btn add-to-cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ thing.name }} - Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .hero-section {
+            padding: 50px 0;
+            background: linear-gradient(135deg, #3498db, #e74c3c);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+        }
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .product-wrapper {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1000px;
+            flex-direction: row;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .product-images {
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            border-right: 10px solid #3498db;
+        }
+        .product-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out;
+        }
+        .product-images img:hover {
+            transform: scale(1.05);
+        }
+        .product-content {
+            width: 50%;
+            padding: 40px;
+        }
+        .product-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .product-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .product-features {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        .product-features li {
+            font-size: 18px;
+            color: #34495e;
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .product-features li:before {
+            content: '\2022';
+            color: #3498db;
+            font-size: 30px;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        .product-price {
+            font-size: 28px;
+            font-weight: 600;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .purchase-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn {
+            font-size: 18px;
+            padding: 14px 28px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .add-to-cart {
+            background-color: #3498db;
+            color: white;
+        }
+        .add-to-cart:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        .buy-now {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .buy-now:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .product-wrapper {
+                flex-direction: column;
+            }
+            .product-title {
+                font-size: 32px;
+            }
+            .product-description {
+                font-size: 16px;
+            }
+            .product-price {
+                font-size: 24px;
+            }
+            .btn {
+                font-size: 16px;
+                padding: 12px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="container">
+            <div class="product-wrapper">
+                <div class="product-images">
+                    {% if thing.image %}
+                    <img src="{{ thing.image.url }}" alt="{{ thing.name }}" width="400">
+                    {% endif %}
+                </div>
+                <div class="product-content">
+                    <h1 class="product-title">{{ thing.name }}</h1>
+                    <p class="product-description">{{ thing.description }}</p>
+                    <h3>Features</h3>
+                    <ul class="product-features">
+                        {% for feature in thing.features %}
+                            <li>{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="product-price">
+                        <h3>Price: ${{ thing.price }}</h3>
+                    </div>
+                    <div class="purchase-info">
+                        <button class="btn add-to-cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html> -->

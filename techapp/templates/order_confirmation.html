@@ -1,0 +1,9 @@
+<h3>Order Summary</h3>
+<ul>
+    {% for item in cart_items %}
+        <li>{{ item.product.name }} - Quantity: {{ item.quantity }} - Price: {{ item.total }}</li>
+    {% endfor %}
+</ul>
+
+<p>Total Quantity: {{ total_quantity }}</p>
+<p>Total Price: {{ total_price }}</p>

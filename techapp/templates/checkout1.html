@@ -1,0 +1,674 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<script src="https://kit.fontawesome.com/342d33497c.js" crossorigin="anonymous"></script>
+
+  </head>
+  <body class="goto-here">
+		<div class="py-1 bg-black">
+    	<div class="container">
+    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+	    		<div class="col-lg-12 d-block">
+		    		<div class="row d-flex">
+		    			<div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
+						    <span class="text">+ 1235 2355 98</span>
+					    </div>
+					    <div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+						    <span class="text">youremail@email.com</span>
+					    </div>
+					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+		  </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+		<img src="{% static '/images/techify.png' %}" alt="IMG-LOGO" style="height: 70px; width: 200px; margin-top: 20px;">
+	    <div class="container">
+	      <!-- <a class="navbar-brand" href="index.html">Minishop</a> -->
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+	          <li class="nav-item dropdown ">
+              <a class="nav-link" href="{% url 'shop' %}"  aria-haspopup="true" aria-expanded="false">Shop</a>
+             
+            </li>
+	          <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="{% url 'contact_view' %}" class="nav-link">Contact</a></li>
+
+			  <li class="nav-item cta cta-colored"><a href="{% url 'user' %}" class="nav-link"> user
+				<i class="fa-solid fa-user" > </i></a></li>
+
+	          <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+    <div class="hero-wrap hero-bread" style="background-image: url({% static 'images/bg_6.jpg' %});">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home</a></span> <span>Checkout</span></p>
+            <h1 class="mb-0 bread">Checkout</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="billing-section">
+        <form method="POST" class="billing-form shadow-lg p-4 rounded bg-light">
+            {% csrf_token %}
+            <h3 class="form-title text-center text-primary mb-4">Billing Information</h3>
+        
+            <div class="form-group mb-3">
+                <label for="id_full_name" class="form-label fw-bold">Full Name</label>
+                {{ form.full_name|add_class:"form-control" }}
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_address" class="form-label fw-bold">Address</label>
+                {{ form.address|add_class:"form-control" }}
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="id_city" class="form-label fw-bold">City</label>
+                    {{ form.city|add_class:"form-control" }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="id_state" class="form-label fw-bold">State</label>
+                    {{ form.state|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="id_zip_code" class="form-label fw-bold">Zip Code</label>
+                    {{ form.zip_code|add_class:"form-control" }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="id_phone_number" class="form-label fw-bold">Phone Number</label>
+                    {{ form.phone_number|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_email" class="form-label fw-bold">Email</label>
+                {{ form.email|add_class:"form-control" }}
+            </div>
+        
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        
+            <button type="submit" class="btn btn-primary w-100">Update Billing Details</button>
+        </form>
+    </section>
+    
+    <style>
+        .billing-section {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .btn-submit {
+            background: #007bff;
+            color: #fff;
+            padding: 10px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .btn-submit:hover {
+            background: #0056b3;
+        }
+    </style>
+    
+    
+    
+    
+    
+
+<!-- ......................................................................................... -->
+
+
+<!-- Styling -->
+<style>
+    .cart-summary-container {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .cart-summary-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .cart-summary-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        padding: 15px;
+        animation: slideUp 0.5s ease-in-out;
+    }
+
+    .cart-summary-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .cart-summary-list li:last-child {
+        border-bottom: none;
+    }
+
+    .quantity-price {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .quantity, .price {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .total-section {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #28a745;
+    }
+
+    .payment-methods {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .payment-methods .radio-option {
+        font-size: 1.2rem;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        transition: background-color 0.3s ease;
+    }
+
+    .payment-methods .radio-option:hover {
+        background-color: #f9f9f9;
+    }
+
+    .payment-methods input[type="radio"] {
+        margin-right: 15px;
+        accent-color: #007bff;
+    }
+
+    .terms-checkbox {
+        font-size: 1.1rem;
+        margin-top: 15px;
+    }
+
+    .payment-button {
+        background: #007bff;
+        color: #fff;
+        padding: 15px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 10px;
+        width: 100%;
+        transition: background 0.3s ease;
+    }
+
+    .payment-button:hover {
+        background: #0056b3;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<!-- Cart Summary Section -->
+<!-- <div class="col-md-6 d-flex">
+    <div class="cart-summary-container shadow-lg rounded">
+        <h3 class="cart-summary-title">Cart Summary</h3>
+        <ul class="cart-summary-list">
+            {% for item in cart_items %}
+                <li>
+                    <div class="product-details">
+                        <span class="product-name">{{ item.product.name }}</span>
+                        <div class="quantity-price">
+                            <span class="quantity">Qty: {{ item.quantity }}</span>
+                            <span class="price">${{ item.total }}</span>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="total-section">
+            <p class="total-quantity">Total Quantity: <strong>{{ total_quantity }}</strong></p>
+            <p class="total-price">Total Price: <strong>${{ total_price }}</strong></p>
+        </div>
+    </div>
+</div> -->
+
+<!-- Payment Method Section -->
+<!-- <div class="col-md-6">
+    <div class="payment-methods shadow-lg rounded">
+        <h3 class="payment-title">Select Payment Method</h3>
+        <div class="payment-options">
+            <div class="radio-option">
+                <input type="radio" id="bank_transfer" name="payment_method" class="mr-2">
+                <label for="bank_transfer">Direct Bank Transfer</label>
+            </div>
+            <div class="radio-option">
+                <input type="radio" id="upi" name="payment_method" class="mr-2">
+                <label for="upi">UPI Payment</label>
+            </div>
+            <div class="radio-option">
+                <input type="radio" id="paypal" name="payment_method" class="mr-2">
+                <label for="paypal">Paypal</label>
+            </div>
+            <div class="radio-option">
+                <input type="radio" id="cod" name="payment_method" class="mr-2">
+                <label for="cod">Cash On Delivery</label>
+            </div>
+        </div>
+        
+        <div class="terms-checkbox">
+            <input type="checkbox" id="terms" class="mr-2">
+            <label for="terms">I have read and accept the terms and conditions</label>
+        </div>
+
+        <button class="payment-button w-100" data-toggle="modal" data-target="#orderConfirmationModal">Place Order</button>
+    </div>
+</div> -->
+
+    
+    
+    
+ 
+
+<!-- Modal -->
+<div class="modal fade" id="orderConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="orderConfirmationModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal-content">
+  <!-- Cart Van Design -->
+  <div class="cart-van-header">
+      <div class="van-header-title">Your Order is on its Way!</div>
+  </div>
+  <div class="cart-van-body">
+      <div class="cart-van-image">
+          <div class="smoke-wheel left-wheel-smoke"></div> <!-- Left Wheel Smoke -->
+          <div class="smoke-wheel right-wheel-smoke"></div> <!-- Right Wheel Smoke -->
+          <img src="{% static 'images/cart-van.png' %}" alt="Cart Van" class="img-fluid animated-van">
+      </div>
+      <div class="cart-van-content">
+          <p>Your order has been successfully placed. We’re preparing your items for delivery. Thank you for shopping with us!</p>
+      </div>
+      <div class="cart-van-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+          <a href="{% url 'shop' %}">
+              <button type="button" class="btn btn-secondary">Shop Again</button>
+          </a>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Styles for Cart Van Modal -->
+<style>
+/* Modal Header */
+.cart-van-header {
+background: linear-gradient(to right, #ffdc8a, #8e44ad); /* Soft purple gradient */
+text-align: center;
+padding: 15px;
+border-radius: 10px 10px 0 0;
+color: white;
+font-size: 1.8rem;
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Body */
+.cart-van-body {
+padding: 20px;
+text-align: center;
+background-color: #f7edd5; /* Light purple background */
+border-radius: 0 0 10px 10px;
+box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+animation: fadeIn 1s ease-in-out 1s forwards;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: auto; /* Make sure the height adjusts based on content */
+max-height: none; /* Remove the max-height restriction */
+overflow: visible; /* Ensure content is visible */
+}
+
+/* Cart Van Image Container */
+.cart-van-image {
+position: relative;
+margin-bottom: 20px;
+display: inline-block;
+}
+
+/* Cart Van Image */
+.cart-van-image img {
+width: 60%;
+max-width: 300px;
+margin-bottom: 20px;
+animation: vanRun 4s ease-in-out forwards;
+}
+
+/* Smoke Effect on Wheels */
+.smoke-wheel {
+position: absolute;
+bottom: 15px;
+width: 60px;
+height: 60px;
+background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+filter: blur(8px);
+opacity: 0.9;
+animation: wheelSmoke 3s ease-in-out infinite;
+}
+
+/* Left and Right Wheel Smoke */
+.left-wheel-smoke {
+left: 20%;
+animation-delay: 0.5s;
+}
+
+.right-wheel-smoke {
+right: 20%;
+animation-delay: 1s;
+}
+
+/* Smoke Animation */
+@keyframes wheelSmoke {
+0% {
+transform: translateY(0) scale(1);
+opacity: 0.9;
+}
+50% {
+transform: translateY(-30px) scale(1.3);
+opacity: 0.5;
+}
+100% {
+transform: translateY(0) scale(1);
+opacity: 0.9;
+}
+}
+
+/* Modal Content */
+.cart-van-content {
+font-size: 1rem;
+margin-bottom: 20px;
+color: #000000; /* Dark purple text for better readability */
+}
+
+/* Modal Footer Button */
+.cart-van-footer {
+text-align: center;
+margin-top: 20px;
+}
+
+.cart-van-footer .btn {
+background-color: #fad170; /* Matching button color */
+color: rgb(0, 0, 0);
+border-radius: 30px;
+padding: 10px 30px;
+font-size: 1rem;
+transition: background-color 0.3s ease;
+margin: 5px;
+}
+
+.cart-van-footer .btn:hover {
+background-color: #ffecbf; /* Slightly lighter purple on hover */
+color: #fff;
+}
+
+/* Running van animation */
+@keyframes vanRun {
+0% {
+transform: translateX(-150%) scale(1);
+}
+50% {
+transform: translateX(100%) scale(1.1);
+}
+100% {
+transform: translateX(300%) scale(1);
+}
+}
+
+/* Fade-in effect for the modal content */
+@keyframes fadeIn {
+from {
+opacity: 0;
+}
+to {
+opacity: 1;
+}
+}
+
+.animated-van {
+animation: vanRun 4s ease-in-out forwards;
+}
+</style>
+
+<!-- footer section -->
+<footer class="ftco-footer ftco-section">
+<div class="container">
+<div class="row">
+    <div class="mouse">
+              <a href="#" class="mouse-icon">
+                  <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+              </a>
+          </div>
+</div>
+<div class="row mb-5">
+<div class="col-md">
+  <div class="ftco-footer-widget mb-4">
+    <h2 class="ftco-heading-2">Techify</h2>
+    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+      <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+      <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+      <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="col-md">
+  <div class="ftco-footer-widget mb-4 ml-md-5">
+    <h2 class="ftco-heading-2">Menu</h2>
+    <ul class="list-unstyled">
+      <li><a href="{% url 'index' %}" class="py-2 d-block">Home</a></li>
+      <li><a href="{% url 'shop' %}" class="py-2 d-block">Shop</a></li>
+      <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+      <li><a href="{% url 'contact_view' %}" class="py-2 d-block">Contact Us</a></li>
+    </ul>
+  </div>
+</div>
+<div class="col-md-4">
+   <div class="ftco-footer-widget mb-4">
+    <h2 class="ftco-heading-2">Help</h2>
+    <div class="d-flex">
+        <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+          <li><a href="#" class="py-2 d-block">Shipping Information</a></li>
+          <li><a href="#" class="py-2 d-block">Returns &amp; Exchange</a></li>
+          <li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
+          <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
+        </ul>
+        <ul class="list-unstyled">
+          <li><a href="#" class="py-2 d-block">FAQs</a></li>
+          <li><a href="#" class="py-2 d-block">Contact</a></li>
+        </ul>
+      </div>
+  </div>
+</div>
+<div class="col-md">
+  <div class="ftco-footer-widget mb-4">
+      <h2 class="ftco-heading-2">Have a Questions?</h2>
+      <div class="block-23 mb-3">
+        <ul>
+          <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+          <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+          <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+        </ul>
+      </div>
+  </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12 text-center">
+
+  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              </p>
+</div>
+</div>
+</div>
+</footer>
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/aos.js' %}"></script>
+<script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'js/scrollax.min.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="{% static 'js/google-map.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<script>
+$(document).ready(function(){
+
+var quantitiy=0;
+ $('.quantity-right-plus').click(function(e){
+      
+      // Stop acting like a button
+      e.preventDefault();
+      // Get the field name
+      var quantity = parseInt($('#quantity').val());
+      
+      // If is not undefined
+          
+          $('#quantity').val(quantity + 1);
+
+        
+          // Increment
+      
+  });
+
+   $('.quantity-left-minus').click(function(e){
+      // Stop acting like a button
+      e.preventDefault();
+      // Get the field name
+      var quantity = parseInt($('#quantity').val());
+      
+      // If is not undefined
+    
+          // Increment
+          if(quantity>0){
+          $('#quantity').val(quantity - 1);
+          }
+  });
+  
+});
+</script>
+
+</body>
+</html>
