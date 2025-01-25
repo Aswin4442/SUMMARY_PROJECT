@@ -10722,4 +10722,143 @@ textarea.form-control {
     .text-success {
       color: #28a745 !important;
     }
+
+<!-- Styles for Cart Van Modal 
+
+/* Modal Header */
+.cart-van-header {
+background: linear-gradient(to right, #ffdc8a, #8e44ad); /* Soft purple gradient */
+text-align: center;
+padding: 15px;
+border-radius: 10px 10px 0 0;
+color: white;
+font-size: 1.8rem;
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Body */
+.cart-van-body {
+padding: 20px;
+text-align: center;
+background-color: #f7edd5; /* Light purple background */
+border-radius: 0 0 10px 10px;
+box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+animation: fadeIn 1s ease-in-out 1s forwards;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: auto; /* Make sure the height adjusts based on content */
+max-height: none; /* Remove the max-height restriction */
+overflow: visible; /* Ensure content is visible */
+}
+
+/* Cart Van Image Container */
+.cart-van-image {
+position: relative;
+margin-bottom: 20px;
+display: inline-block;
+}
+
+/* Cart Van Image */
+.cart-van-image img {
+width: 60%;
+max-width: 300px;
+margin-bottom: 20px;
+animation: vanRun 4s ease-in-out forwards;
+}
+
+/* Smoke Effect on Wheels */
+.smoke-wheel {
+position: absolute;
+bottom: 15px;
+width: 60px;
+height: 60px;
+background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+filter: blur(8px);
+opacity: 0.9;
+animation: wheelSmoke 3s ease-in-out infinite;
+}
+
+/* Left and Right Wheel Smoke */
+.left-wheel-smoke {
+left: 20%;
+animation-delay: 0.5s;
+}
+
+.right-wheel-smoke {
+right: 20%;
+animation-delay: 1s;
+}
+
+/* Smoke Animation */
+@keyframes wheelSmoke {
+0% {
+transform: translateY(0) scale(1);
+opacity: 0.9;
+}
+50% {
+transform: translateY(-30px) scale(1.3);
+opacity: 0.5;
+}
+100% {
+transform: translateY(0) scale(1);
+opacity: 0.9;
+}
+}
+
+/* Modal Content */
+.cart-van-content {
+font-size: 1rem;
+margin-bottom: 20px;
+color: #000000; /* Dark purple text for better readability */
+}
+
+/* Modal Footer Button */
+.cart-van-footer {
+text-align: center;
+margin-top: 20px;
+}
+
+.cart-van-footer .btn {
+background-color: #fad170; /* Matching button color */
+color: rgb(0, 0, 0);
+border-radius: 30px;
+padding: 10px 30px;
+font-size: 1rem;
+transition: background-color 0.3s ease;
+margin: 5px;
+}
+
+.cart-van-footer .btn:hover {
+background-color: #ffecbf; /* Slightly lighter purple on hover */
+color: #fff;
+}
+
+/* Running van animation */
+@keyframes vanRun {
+0% {
+transform: translateX(-150%) scale(1);
+}
+50% {
+transform: translateX(100%) scale(1.1);
+}
+100% {
+transform: translateX(300%) scale(1);
+}
+}
+
+/* Fade-in effect for the modal content */
+@keyframes fadeIn {
+from {
+opacity: 0;
+}
+to {
+opacity: 1;
+}
+}
+
+.animated-van {
+animation: vanRun 4s ease-in-out forwards;
+}
+</style>
     

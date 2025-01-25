@@ -221,7 +221,7 @@ def checkout(request):
     else:
         form = BillingDetailsForm(instance=billing_details)
     
-    return render(request, 'checkout1.html', {
+    return render(request, 'checkout_page.html', {
         'cart_items': cart_items, 
         'total_quantity': total_quantity, 
         'total_price': total_price,
@@ -235,7 +235,7 @@ def order_summary(request):
     total_quantity = sum(item.quantity for item in cart_items)
     total_price = sum(item.total() for item in cart_items)
     
-    return render(request, 'hdhdffh.html', {
+    return render(request, 'order_summary.html', {
         'cart_items': cart_items, 
         'total_quantity': total_quantity, 
         'total_price': total_price

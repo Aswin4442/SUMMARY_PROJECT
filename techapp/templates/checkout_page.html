@@ -1,4 +1,6 @@
 {% load static %}
+{% load widget_tweaks %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -92,215 +94,128 @@
     </div>
 
 
-
-    <form method="POST" class="billing-form">
-        {% csrf_token %}
-        <h3>Billing Information</h3>
+    <section class="billing-section">
+        <form method="POST" class="billing-form shadow-lg p-4 rounded bg-light">
+            {% csrf_token %}
+            <h3 class="form-title text-center text-primary mb-4">Billing Information</h3>
         
-        <!-- Display the form fields with custom styles -->
-        <div class="form-group">
-            <label for="id_full_name" class="form-label">Full Name</label>
-            {{ form.full_name }}
-        </div>
-        <div class="form-group">
-            <label for="id_address" class="form-label">Address</label>
-            {{ form.address }}
-        </div>
-        <div class="form-group">
-            <label for="id_city" class="form-label">City</label>
-            {{ form.city }}
-        </div>
-        <div class="form-group">
-            <label for="id_state" class="form-label">State</label>
-            {{ form.state }}
-        </div>
-        <div class="form-group">
-            <label for="id_zip_code" class="form-label">Zip Code</label>
-            {{ form.zip_code }}
-        </div>
-        <div class="form-group">
-            <label for="id_phone_number" class="form-label">Phone Number</label>
-            {{ form.phone_number }}
-        </div>
-        <div class="form-group">
-            <label for="id_email" class="form-label">Email</label>
-            {{ form.email }}
-        </div>
-        
-        <!-- Display form errors if any -->
-        {% if form.errors %}
-            <div class="errors">
-                <ul>
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    {% endfor %}
-                </ul>
+            <div class="form-group mb-3">
+                <label for="id_full_name" class="form-label fw-bold">Full Name</label>
+                {{ form.full_name|add_class:"form-control" }}
             </div>
-        {% endif %}
+            <div class="form-group mb-3">
+                <label for="id_address" class="form-label fw-bold">Address</label>
+                {{ form.address|add_class:"form-control" }}
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="id_city" class="form-label fw-bold">City</label>
+                    {{ form.city|add_class:"form-control" }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="id_state" class="form-label fw-bold">State</label>
+                    {{ form.state|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="id_zip_code" class="form-label fw-bold">Zip Code</label>
+                    {{ form.zip_code|add_class:"form-control" }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="id_phone_number" class="form-label fw-bold">Phone Number</label>
+                    {{ form.phone_number|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_email" class="form-label fw-bold">Email</label>
+                {{ form.email|add_class:"form-control" }}
+            </div>
         
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary">Update Billing Details</button>
-    </form>
-    
-    <h3>Cart Summary</h3>
-    <ul>
-        {% for item in cart_items %}
-            <li>{{ item.product.name }} - Quantity: {{ item.quantity }} - Price: {{ item.total }}</li>
-        {% endfor %}
-    </ul>
-    
-    <p>Total Quantity: {{ total_quantity }}</p>
-    <p>Total Price: {{ total_price }}</p>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        
+            <button type="submit" class="btn btn-primary w-100">Update Billing Details</button>
+        </form>
+    </section>
     
     <style>
-        .billing-form .form-group {
-            margin-bottom: 15px;
+        .billing-section {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
         }
-    
-        .billing-form .form-label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 600;
         }
-    
-        .billing-form .form-control {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-    
-        .billing-form .btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
+        .btn-submit {
+            background: #007bff;
+            color: #fff;
+            padding: 10px;
+            font-size: 1.2rem;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
-    
-        .billing-form .btn:hover {
-            background-color: #0056b3;
-        }
-    
-        .errors {
-            color: red;
-            margin-top: 10px;
-        }
-    
-        .errors ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-    
-        .errors li {
-            margin-bottom: 5px;
+        .btn-submit:hover {
+            background: #0056b3;
         }
     </style>
     
+    
+    
+    
+    
+
+<!-- ......................................................................................... -->
 
 
 
+  
+
+  
+    
+ <!-- .col-md-8 -->
 
 
-
-    <div class="row mt-5 pt-3 d-flex">
-        <div class="col-md-6 d-flex">
-            <div class="cart-detail cart-total bg-light p-3 p-md-4">
-                <h3 class="billing-heading mb-4">Cart Total</h3>
-                <p class="d-flex">
-                          <span>Subtotal</span>
-                          <span>$20.60</span>
-                      </p>
-                      <p class="d-flex">
-                          <span>Delivery</span>
-                          <span>$0.00</span>
-                      </p>
-                      <p class="d-flex">
-                          <span>Discount</span>
-                          <span>$3.00</span>
-                      </p>
-                      <hr>
-                      <p class="d-flex total-price">
-                          <span>Total</span>
-                          <span>$17.60</span>
-                      </p>
-                      </div>
-        </div>
-        <div class="col-md-6">
-            <div class="cart-detail bg-light p-3 p-md-4">
-                <h3 class="billing-heading mb-4">Payment Method</h3>
-                          <div class="form-group">
-                              <div class="col-md-12">
-                                  <div class="radio">
-                                     <label><input type="radio" name="optradio" class="mr-2"> Direct Bank Tranfer</label>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="col-md-12">
-                                  <div class="radio">
-                                     <label><input type="radio" name="optradio" class="mr-2"> UPI Payment</label>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="col-md-12">
-                                  <div class="radio">
-                                     <label><input type="radio" name="optradio" class="mr-2"> Paypal</label>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="col-md-12">
-                                  <div class="radio">
-                                     <label><input type="radio" name="optradio" class="mr-2">Cash On Delivery</label>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="col-md-12">
-                                  <div class="checkbox">
-                                     <label><input type="checkbox" value="" class="mr-2"> I have read and accept the terms and conditions</label>
-                                  </div>
-                              </div>
-                          </div>
-                          <p><a href="#"class="btn btn-primary py-3 px-4"data-toggle="modal" data-target="#orderConfirmationModal">Place an order</a></p>
-                      </div>
-        </div>
-    </div>
-</div> <!-- .col-md-8 -->
-</div>
-</div>
-</section> <!-- .section -->
+<!-- .section -->
 
 <!-- Modal -->
 <div class="modal fade" id="orderConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="orderConfirmationModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
 <div class="modal-content">
-  <!-- Cart Van Design -->
-  <div class="cart-van-header">
-      <div class="van-header-title">Your Order is on its Way!</div>
+<!-- Cart Van Design -->
+<div class="cart-van-header">
+  <div class="van-header-title">Your Order is on its Way!</div>
+</div>
+<div class="cart-van-body">
+  <div class="cart-van-image">
+      <div class="smoke-wheel left-wheel-smoke"></div> <!-- Left Wheel Smoke -->
+      <div class="smoke-wheel right-wheel-smoke"></div> <!-- Right Wheel Smoke -->
+      <img src="{% static 'images/cart-van.png' %}" alt="Cart Van" class="img-fluid animated-van">
   </div>
-  <div class="cart-van-body">
-      <div class="cart-van-image">
-          <div class="smoke-wheel left-wheel-smoke"></div> <!-- Left Wheel Smoke -->
-          <div class="smoke-wheel right-wheel-smoke"></div> <!-- Right Wheel Smoke -->
-          <img src="{% static 'images/cart-van.png' %}" alt="Cart Van" class="img-fluid animated-van">
-      </div>
-      <div class="cart-van-content">
-          <p>Your order has been successfully placed. We’re preparing your items for delivery. Thank you for shopping with us!</p>
-      </div>
-      <div class="cart-van-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
-          <a href="{% url 'shop' %}">
-              <button type="button" class="btn btn-secondary">Shop Again</button>
-          </a>
-      </div>
+  <div class="cart-van-content">
+      <p>Your order has been successfully placed. We’re preparing your items for delivery. Thank you for shopping with us!</p>
   </div>
+  <div class="cart-van-footer">
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+      <a href="{% url 'shop' %}">
+          <button type="button" class="btn btn-secondary">Shop Again</button>
+      </a>
+  </div>
+</div>
 </div>
 </div>
 </div>
@@ -443,6 +358,11 @@ opacity: 1;
 animation: vanRun 4s ease-in-out forwards;
 }
 </style>
+    
+    
+    
+ 
+
 
 <!-- footer section -->
 <footer class="ftco-footer ftco-section">

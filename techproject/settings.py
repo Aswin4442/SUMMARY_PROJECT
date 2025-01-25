@@ -123,7 +123,7 @@ MEDIA_ROOT = BASE_DIR /'media'
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "C:/Users/PYTHON/Desktop/Py-Projects/add_to_cart_project-main/techproject/static",
+    BASE_DIR / "C:/Users/Aswin.B/OneDrive/Documents/BillingDetails-Techify-main/techproject/static",
 ]
 
 
