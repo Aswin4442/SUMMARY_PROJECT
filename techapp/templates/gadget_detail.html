@@ -106,16 +106,57 @@
 <div class="container my-5">
   <div class="row">
     <!-- Image Section -->
-<div class="col-md-6">
-  {% if thing.image %}
-  <div class="product-image-container position-relative">
-    <img src="{{ thing.image.url }}" alt="{{ thing.name }}" class="img-fluid product-image rounded">
-    <div class="image-overlay d-flex align-items-center justify-content-center">
-      <span class="overlay-text">View Product</span>
+    <div class="col-md-6">
+      {% if thing.image %}
+      <div class="product-image-container position-relative">
+        <img src="{{ thing.image.url }}" alt="{{ thing.name }}" class="img-fluid product-image rounded">
+          <a href="{{ thing.image.url }}" style="background-image:url('{{ thing.image.url }}') ;">
+        <div class="image-overlay d-flex align-items-center justify-content-center">
+          <span class="overlay-text">View Product</span>
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Product Info Section -->
+    <div class="col-md-6 d-flex flex-column justify-content-center">
+      <!-- Product Title -->
+      <h2 class="product-title text-dark fw-bold mb-3">{{ thing.name }}</h2>
+      
+      <!-- Product Description -->
+      <p class="product-description text-secondary mb-4">{{ thing.description }}</p>
+
+      <!-- Product Price -->
+      <div class="product-price text-danger mb-4">
+        <h3 class="fw-semibold">₹ {{ thing.price }}</h3>
+      </div>
+
+      <!-- Features -->
+      <h4 class="text-primary mb-3">Features:</h4>
+      <ul class="list-unstyled">
+        {% for feature in thing.features %}
+        <li><i class="fa fa-check-circle text-success"></i> {{ feature }}</li>
+        {% endfor %}
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="d-flex mt-4">
+        <a href="{% url 'add_to_cart' thing.id %}">
+          <button class="btn btn-primary btn-lg me-3 shadow-sm add-to-cart-btn">
+            <i class="fa fa-shopping-cart me-2"></i> Add to Cart
+          </button>
+        </a>
+        <a href="{% url 'checkout' %}">
+          <button class="btn btn-success btn-lg shadow-sm buy-now-btn">
+            <i class="fa fa-credit-card me-2"></i> Buy Now
+          </button>
+        </a>
+      </div>
     </div>
   </div>
-  {% endif %}
 </div>
+<!-- End Product Detail Section -->
 
 <style>
   /* Product Image Container */
@@ -130,9 +171,11 @@
   /* Product Image */
   .product-image {
     max-width: 100%;
+    max-height: 500px;
     height: auto;
     display: block;
     transition: transform 0.4s ease, filter 0.3s ease;
+    object-fit: cover;
   }
 
   .product-image:hover {
@@ -179,97 +222,46 @@
     transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   }
-</style>
 
-
-    <!-- Product Info Section -->
-    <div class="col-md-6 d-flex flex-column justify-content-center">
-      <!-- Product Title -->
-      <h2 class="product-title text-dark font-weight-bold">{{ thing.name }}</h2>
-      
-      <!-- Product Description -->
-      <p class="product-description text-muted">{{ thing.description }}</p>
-
-      <!-- Product Price -->
-      <div class="product-price text-danger">
-        <h3>₹ {{ thing.price }}</h3>
-      </div>
-
-      <!-- Features -->
-      <h4 class="text-primary">Features:</h4>
-      <ul class="list-unstyled">
-        {% for feature in thing.features %}
-        <li><i class="fa fa-check-circle text-success"></i> {{ feature }}</li>
-        {% endfor %}
-      </ul>
-
-      <!-- Action Buttons -->
-      <div class="d-flex mt-4">
-        <a href="{% url 'add_to_cart' thing.id %}">
-          <button class="btn btn-primary btn-lg mr-3 shadow-sm add-to-cart-btn">
-            <span class="icon-shopping-cart"></span> Add to Cart
-          </button>
-        </a>
-        <a href="{% url 'checkout' %}">
-          <button class="btn btn-success btn-lg shadow-sm buy-now-btn">
-            <span class="icon-check-circle"></span> Buy Now
-          </button>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Product Detail Section -->
-
-<style>
-  /* Base styles for title, price, and description */
+  /* Product Title */
   .product-title {
-    font-size: 36px;
+    font-size: 2.5rem;
     font-weight: 700;
     color: #2c3e50;
-    margin-bottom: 20px;
   }
 
+  /* Product Description */
   .product-description {
-    font-size: 18px;
-    color: #7f8c8d;
+    font-size: 1.125rem;
     line-height: 1.6;
-    margin-bottom: 25px;
+    color: #7f8c8d;
   }
 
+  /* Product Price */
   .product-price h3 {
-    font-size: 28px;
+    font-size: 2rem;
     font-weight: 600;
     color: #e74c3c;
-    margin-top: 10px;
   }
 
-  /* Product Image */
-
-
-  /* Features List */
-  .text-primary {
-    color: #3498db !important;
-  }
-
+  /* Features */
   h4 {
-    font-size: 22px;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-top: 30px;
     color: #3498db;
   }
 
   .list-unstyled li {
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #555;
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
   }
 
   /* Action Buttons */
   .add-to-cart-btn, .buy-now-btn {
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 600;
-    padding: 14px 28px;
+    padding: 12px 24px;
     border-radius: 8px;
     transition: transform 0.2s ease, background-color 0.3s ease;
   }
@@ -284,45 +276,37 @@
     border: none;
   }
 
-  .add-to-cart-btn:hover, .buy-now-btn:hover {
-    transform: translateY(-3px);
+  .add-to-cart-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+
+  .buy-now-btn:hover {
+    background-color: #2ecc71;
+    transform: translateY(-2px);
   }
 
   .add-to-cart-btn:focus, .buy-now-btn:focus {
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
   }
 
-  .add-to-cart-btn:hover {
-    background-color: #2980b9;
-  }
-
-  .buy-now-btn:hover {
-    background-color: #2ecc71;
-  }
-
-  /* Button Icons */
-  .icon-shopping-cart, .icon-check-circle {
-    margin-right: 10px;
-  }
-
-  /* Responsive Image and Layout */
+  /* Responsive Design */
   @media (max-width: 768px) {
-    .product-image-container img {
-      max-height: 400px;
-      object-fit: contain;
+    .product-image {
+      max-height: 300px;
     }
 
     .product-title {
-      font-size: 28px;
+      font-size: 2rem;
     }
 
     .product-price h3 {
-      font-size: 22px;
+      font-size: 1.5rem;
     }
 
     .add-to-cart-btn, .buy-now-btn {
-      font-size: 16px;
-      padding: 12px 20px;
+      font-size: 1rem;
+      padding: 10px 20px;
     }
   }
 </style>

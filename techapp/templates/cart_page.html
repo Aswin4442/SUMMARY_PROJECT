@@ -92,6 +92,17 @@
 	  </nav>
     <!-- END nav -->
 
+    <div class="hero-wrap hero-bread" style="background-image: url({% static 'images/bg_6.jpg' %});">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home</a></span> <span>Cart</span></p>
+            <h1 class="mb-0 bread">My Wishlist</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
    
 
 <section class="ftco-section ftco-cart">
@@ -189,7 +200,7 @@
     }
   
     .btn-primary:hover {
-      background: #e77b2f;
+      background: #ea8339;
     }
   
     .btn-danger {
@@ -252,12 +263,12 @@
               <div class="cart-item-details">
                   <h4 class="font-weight-bold text-dark">{{ item.product.name }}</h4>
                   <p class="text-muted">Price: <span class="text-success">₹{{ item.product.price }}</span></p>
-                  <p>Quantity: {{ item.quantity }}</p>
+                  <p>Quantity:<b style="color: #333;"> {{ item.quantity }}</b></p>
                   <div class="btn-group">
                       <form action="{% url 'update_cart' item.id %}" method="POST">
                           {% csrf_token %}
                           <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control" style="width: 80px;">
-                          <button type="submit" class="btn btn-update btn-primary">Update</button>
+                          <button type="submit" class="btn btn-update btn-primary ">Update</button>
                       </form>
                       <form action="{% url 'remove_from_cart' item.id %}" method="POST">
                           {% csrf_token %}
@@ -266,7 +277,7 @@
                   </div>
               </div>
               <div class="ms-auto align-self-center">
-                  <h4 class="text-dark font-weight-bold">₹ {{ item.total }}</h4>
+                  <h4 class="text-primary font-weight-bold">₹ {{ item.total }}</h4>
               </div>
           </div>
       {% empty %}
@@ -275,10 +286,10 @@
       <div class="cart-summary mt-5">
           <h3 class="font-weight-bold">Order Summary</h3>
           <hr>
-          <p style="color: #333;">Total Items: <span class="font-weight-bold" style="color:#fff;">{{ total_quantity }}</span></p>
-          <p style="color: #333;">Total Price: <span class="font-weight-bold" style="color:#fff;">₹{{ total_price }}</span></p>
+          <p style="color: #000000;">Total Items: <span class="font-weight-bold" style="color:#fff;">{{ total_quantity }}</span></p>
+          <p style="color: #000000;">Total Price: <span class="font-weight-bold" style="color:#fff;">₹{{ total_price }}</span></p>
           <a href="{% url 'checkout' %}">
-          <button class="btn btn-lg btn-primary w-100 text-dark">Proceed to Buy</button></a>
+          <button class="btn btn-lg btn-primary w-50 text-dark">Proceed to Buy</button></a>
       </div>
   </div>
 </section>

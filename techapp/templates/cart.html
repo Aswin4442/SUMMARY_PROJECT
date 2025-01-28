@@ -101,6 +101,52 @@
       </div>
     </div>
 
+
+	<div class="d-flex mt-4">
+        <a href="{% url 'add_to_cart' thing.id %}">
+          <button class="btn btn-primary btn-lg me-3 shadow-sm add-to-cart-btn">
+            <i class="fa fa-shopping-cart me-2"></i> Add to Cart
+          </button>
+        </a>
+        <a href="{% url 'checkout' %}">
+          <button class="btn btn-success btn-lg shadow-sm buy-now-btn">
+            <i class="fa fa-credit-card me-2"></i> Buy Now
+          </button>
+        </a>
+      </div>
+	  /* Action Buttons */
+	  .add-to-cart-btn, .buy-now-btn {
+		font-size: 1.125rem;
+		font-weight: 600;
+		padding: 12px 24px;
+		border-radius: 8px;
+		transition: transform 0.2s ease, background-color 0.3s ease;
+	  }
+	
+	  .add-to-cart-btn {
+		background-color: #3498db;
+		border: none;
+	  }
+	
+	  .buy-now-btn {
+		background-color: #27ae60;
+		border: none;
+	  }
+	
+	  .add-to-cart-btn:hover {
+		background-color: #2980b9;
+		transform: translateY(-2px);
+	  }
+	
+	  .buy-now-btn:hover {
+		background-color: #2ecc71;
+		transform: translateY(-2px);
+	  }
+	
+	  .add-to-cart-btn:focus, .buy-now-btn:focus {
+		box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
+	  }
+
 	<section class="ftco-section ftco-cart">
 		<style>
 			.cart-container {
