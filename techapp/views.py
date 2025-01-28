@@ -194,7 +194,7 @@ def update_cart(request, cart_item_id):
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Product, CartItem, BillingDetails
+from .models import Product, CartItem, BillingDetails, Order, OrderItem
 from .forms import BillingDetailsForm
 
 @login_required
@@ -216,11 +216,37 @@ def checkout(request):
             billing_details = form.save(commit=False)  # Save without committing to DB yet
             billing_details.user = request.user  # Ensure the user field is set
             billing_details.save()  # Save the instance with the user field set
-            messages.success(request, 'Billing details updated successfully!')
-            return redirect('order_summary')  # Redirect to order summary or payment page
+    #         messages.success(request, 'Billing details updated successfully!')
+    #         return redirect('order_summary')  # Redirect to order summary or payment page
+    # else:
+    #     form = BillingDetailsForm(instance=billing_details)
+            cart_items = CartItem.objects.filter(user =request.user)
+            total_price = sum(item.total() for item in cart_items)
+            total_quantity = sum(item.quantity for item in cart_items)
+            
+            # create the order
+            order = Order.objects.create(
+                user=request.user,
+                total_price=total_price,
+                total_quantity=total_quantity,
+                shipping_address=billing_details.address,
+            )
+            
+            for item in cart_items:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item.product,
+                    quantity=item.quantity,
+                    price=item.product.price,
+                )
+            
+            CartItem.objects.filter(user=request.user).delete()
+            
+            messages.success(request, 'Billing details updatedand order placed Succesfully!')
+            return redirect ('order_summary', order_id=order.id)
     else:
         form = BillingDetailsForm(instance=billing_details)
-    
+            
     return render(request, 'checkout_page.html', {
         'cart_items': cart_items, 
         'total_quantity': total_quantity, 
@@ -230,13 +256,29 @@ def checkout(request):
 
 
 @login_required
-def order_summary(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    total_quantity = sum(item.quantity for item in cart_items)
-    total_price = sum(item.total() for item in cart_items)
+def order_summary(request, order_id):
+    order =Order.objects.filter(id=order_id, user=request.user).first()
+    if not order:
+        messages.error(request, 'Order not found.')
+        return redirect('cart')
+    order_items =OrderItem.objects.filter(order=order)
+    
+    total_quantity = sum(item.quantity for item in order_items)
+    total_price = sum(item.total() for item in order_items)
+    
+    order_items_with_names =[
+        {
+            'product_name': item.product.name,
+            'quantity': item.quantity,
+            'price': item.price,
+            'total':item.quantity * item.price
+        }
+        for item in order_items
+    ]
     
     return render(request, 'order_summary.html', {
-        'cart_items': cart_items, 
+        'order': order,
+        'order_items': order_items, 
         'total_quantity': total_quantity, 
         'total_price': total_price
     })

@@ -22,6 +22,7 @@ from django.conf.urls.static import static# from techapp import views
 urlpatterns = [
     path('',include('techapp.urls')),
     # path('index/product/about/',views.about,name='about'),
+    path('captcha/', include('captcha.urls')), 
     path('admin/', admin.site.urls),
     
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

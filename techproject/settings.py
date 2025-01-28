@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CAPTCHA_FONT_SIZE = 40
+CAPTCHA_LENGTH = 6
+CAPTCHA_TIMEOUT = 300  # Timeout in seconds
+CAPTCHA_IMAGE_SIZE = (190, 50)
+
 
 # Application definition
 
@@ -39,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'techapp',
     'widget_tweaks',
+    'captcha',
 
 ]
 

@@ -101,7 +101,7 @@
           <div class="cart-summary p-4 rounded shadow-sm bg-white">
             <h3 class="cart-summary-title text-center font-weight-bold mb-4">YOUR CART</h3>
             <ul class="list-group mb-3">
-              {% for item in cart_items %}
+              {% for item in order_items %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   <div>
                     <h6 class="my-0">{{ item.product.name }}</h6>

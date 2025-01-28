@@ -153,6 +153,19 @@
             {% endif %}
           </div>
 
+                    <!-- Captcha Field -->
+                    <div class="mb-3">
+                      <label for="id_captcha" class="form-label">Captcha</label>
+                      {{ form.captcha }}
+                      {% if form.captcha.errors %}
+                        <div class="text-danger">
+                          {% for error in form.captcha.errors %}
+                            <p>{{ error }}</p>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+
           <!-- Submit Button -->
           <div class="d-flex justify-content-center align-items-center w-100">
             <button type="submit" class="btn btn-primary mt-3 w-100">Register</button>
