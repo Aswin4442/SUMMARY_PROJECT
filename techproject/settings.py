@@ -133,6 +133,9 @@ STATICFILES_DIRS = [
 ]
 
 
+RAZORPAY_KEY_ID ='rzp_test_N8OgX89d5kCevO'
+RAZORPAY_KEY_SECRET= '0cq7vuOGLWy4A6Fw4fV5c0tM'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

@@ -74,7 +74,7 @@
 			  <li class="nav-item cta cta-colored"><a href="{% url 'user' %}" class="nav-link"> user
 				<i class="fa-solid fa-user" > </i></a></li>
 
-	          <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	          <!-- <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li> -->
 
 	        </ul>
 	      </div>
@@ -102,17 +102,19 @@
             <h3 class="cart-summary-title text-center font-weight-bold mb-4">YOUR CART</h3>
             <ul class="list-group mb-3">
               {% for item in order_items %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between font-weight-bold align-items-center">
                   <div>
-                    <h6 class="my-0">{{ item.product.name }}</h6>
-                    <small class="text-muted">Qty: {{ item.quantity }}</small>
+                    <h6 class="my-0 font-weight-bold">{{ item.product.name }}</h6>
+                    <!-- <small class="text-muted">Qty: {{ item.quantity }}</small> -->
                   </div>
-                  <span class="text-primary">${{ item.total }}</span>
+                  <span class="text-primary">₹{{ item.total }}</span>
                 </li>
               {% endfor %}
             </ul>
-            <p class="font-weight-bold">Total Quantity: {{ total_quantity }}</p>
-            <p class="font-weight-bold text-success">Total Price: ${{ total_price }}</p>
+            <!-- <p class="font-weight-bold">Total Quantity: {{ total_quantity }}</p> -->
+            <p style="color: #000000;font-weight: bold;">Total Quantity: <span><b class="font-weight-bolder text-danger">{{ total_quantity }}</b></span></p>
+            <!-- <p class="font-weight-bold text-success">Total Price: ${{ total_price }}</p> -->
+            <p style="color: #000000; font-weight: bold;">Total Price: <span><b class="font-weight-bold text-success">₹ {{ total_price }}</b></span></p>
           </div>
         </div>
 
@@ -121,49 +123,18 @@
 <div class="col-md-6">
   <div class="cart-detail bg-light p-5 rounded shadow-sm">
     <h3 class="billing-heading mb-4 text-center">Payment Method</h3>
-    <div class="form-group">
-      <div class="radio custom-radio">
-        <input type="radio" id="bank-transfer" name="payment-method" class="mr-2">
-        <label for="bank-transfer" class="custom-radio-label">Direct Bank Transfer</label>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="radio custom-radio">
-        <input type="radio" id="upi-payment" name="payment-method" class="mr-2">
-        <label for="upi-payment" class="custom-radio-label">UPI Payment</label>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="radio custom-radio">
-        <input type="radio" id="paypal" name="payment-method" class="mr-2">
-        <label for="paypal" class="custom-radio-label">PayPal</label>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="radio custom-radio">
-        <input type="radio" id="cod" name="payment-method" class="mr-2">
-        <label for="cod" class="custom-radio-label">Cash On Delivery</label>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="checkbox">
-        <input type="checkbox" id="terms" class="mr-2">
-        <label for="terms">I have read and accept the terms and conditions</label>
-      </div>
-    </div>
     <p class="text-center">
-      <a href="#" class="btn btn-primary py-3 px-4" data-toggle="modal" data-target="#orderConfirmationModal">Place Order</a>
+      <button id="rzp-button1" class="btn btn-primary py-3 px-4">Pay with Razorpay</button>
     </p>
   </div>
 </div>
+</div>
+</div>
+</section>
 
-            </div>
-           
-          </div>
-        
       
    
-</section>
+
 
 <style>
   /* Styling the entire payment method section */
@@ -522,6 +493,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="{% static 'js/google-map.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
     <script>
     $(document).ready(function(){
@@ -559,6 +531,34 @@
       
     });
     </script>
+
+    <script>
+  var options = {
+      "key": "rzp_test_N8OgX89d5kCevO", // Replace with your Razorpay key
+      "amount": "{{ total_price|add:'0' }}00", // Convert price to paise
+      "currency": "INR",
+      "name": "Techify",
+      "description": "Order Payment",
+      "image": "{% static 'images/techify.png' %}",
+      "handler": function (response){
+          alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+          // Redirect to confirmation or backend processing
+      },
+      "prefill": {
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "contact": "9999999999"
+      },
+      "theme": {
+          "color": "#007bff"
+      }
+  };
+  var rzp1 = new Razorpay(options);
+  document.getElementById('rzp-button1').onclick = function(e){
+      rzp1.open();
+      e.preventDefault();
+  }
+</script>
     
     </body>
     </html>

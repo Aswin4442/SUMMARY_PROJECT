@@ -105,10 +105,12 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for order in orders %}
                   <tr class="text-center">
-                    <td>#12345</td>
+                    <td># {{ order.id }}</td>
                     <td>
                       <div class="product-name">
+                        {% for item in  %}
                         <h3>PS5 Console</h3>
                         <p>Lightning-fast loading and breathtaking graphics</p>
                       </div>

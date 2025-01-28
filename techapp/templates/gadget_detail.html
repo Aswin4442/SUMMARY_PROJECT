@@ -102,147 +102,231 @@
       </div>
     </div>
 
-    <!-- Product Detail -->
-   <!-- Product Detail -->
+<!-- Product Detail Section -->
 <div class="container my-5">
-    <div class="row">
-      <!-- Image Section -->
-      <div class="col-md-6">
-        {% if thing.image %}
-        <div class="product-image-container">
-          <img src="{{ thing.image.url }}" alt="{{ thing.name }}" class="img-fluid rounded shadow-lg">
-        </div>
-        {% endif %}
+  <div class="row">
+    <!-- Image Section -->
+<div class="col-md-6">
+  {% if thing.image %}
+  <div class="product-image-container position-relative">
+    <img src="{{ thing.image.url }}" alt="{{ thing.name }}" class="img-fluid product-image rounded">
+    <div class="image-overlay d-flex align-items-center justify-content-center">
+      <span class="overlay-text">View Product</span>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<style>
+  /* Product Image Container */
+  .product-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Product Image */
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease, filter 0.3s ease;
+  }
+
+  .product-image:hover {
+    transform: scale(1.1);
+    filter: brightness(0.9);
+  }
+
+  /* Gradient Overlay */
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 16px;
+    z-index: 2;
+  }
+
+  .product-image-container:hover .image-overlay {
+    opacity: 1;
+  }
+
+  /* Overlay Text */
+  .overlay-text {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .product-image-container:hover .overlay-text {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hover Effects */
+  .product-image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+
+    <!-- Product Info Section -->
+    <div class="col-md-6 d-flex flex-column justify-content-center">
+      <!-- Product Title -->
+      <h2 class="product-title text-dark font-weight-bold">{{ thing.name }}</h2>
+      
+      <!-- Product Description -->
+      <p class="product-description text-muted">{{ thing.description }}</p>
+
+      <!-- Product Price -->
+      <div class="product-price text-danger">
+        <h3>₹ {{ thing.price }}</h3>
       </div>
-  
-      <!-- Product Info Section -->
-      <div class="col-md-6 d-flex flex-column justify-content-center">
-        <!-- Product Title -->
-        <h2 class="product-title text-dark font-weight-bold">{{ thing.name }}</h2>
-        
-        <!-- Product Description -->
-        <p class="product-description text-muted">{{ thing.description }}</p>
-  
-        <!-- Product Price -->
-        <div class="product-price text-danger">
-          <h3>Price: ₹{{ thing.price }}</h3>
-        </div>
-  
-        <!-- Features -->
-        <h4 class="text-primary">Features:</h4>
-        <ul class="list-unstyled">
-          {% for feature in thing.features %}
-          <li><i class="fa fa-check-circle text-success"></i> {{ feature }}</li>
-          {% endfor %}
-        </ul>
-  
-        <!-- Quantity Selection -->
-        <div class="quantity d-flex align-items-center">
-          <label for="quantity" class="font-weight-bold">Quantity:</label>
-          <button class="btn btn-outline-secondary quantity-btn" id="minus" type="button">-</button>
-          <input type="text" id="quantity" name="quantity" class="form-control mx-2" value="1" style="width: 60px;">
-          <button class="btn btn-outline-secondary quantity-btn" id="plus" type="button">+</button>
-        </div>
-  
-        <!-- Action Buttons -->
-        <div class="d-flex mt-4">
-            <a href="{% url 'add_to_cart' thing.id %}">
-          <button class="btn btn-primary btn-lg mr-2 shadow-sm add-to-cart-btn">
+
+      <!-- Features -->
+      <h4 class="text-primary">Features:</h4>
+      <ul class="list-unstyled">
+        {% for feature in thing.features %}
+        <li><i class="fa fa-check-circle text-success"></i> {{ feature }}</li>
+        {% endfor %}
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="d-flex mt-4">
+        <a href="{% url 'add_to_cart' thing.id %}">
+          <button class="btn btn-primary btn-lg mr-3 shadow-sm add-to-cart-btn">
             <span class="icon-shopping-cart"></span> Add to Cart
           </button>
-         </a>
-          <a href="{% url 'checkout' %}">
-            <button class="btn btn-success btn-lg shadow-sm buy-now-btn">
-              <span class="icon-check-circle"></span> Buy Now
-            </button>
-          </a>
-        </div>
+        </a>
+        <a href="{% url 'checkout' %}">
+          <button class="btn btn-success btn-lg shadow-sm buy-now-btn">
+            <span class="icon-check-circle"></span> Buy Now
+          </button>
+        </a>
       </div>
     </div>
   </div>
-  <!-- End Product Detail Section -->
-  
-  <style>
-    .product-title {
-      font-size: 32px;
-      font-weight: 700;
-      color: #333;
-      margin-bottom: 20px;
-    }
-  
-    .product-description {
-      font-size: 18px;
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
-  
-    .product-price h3 {
-      font-size: 24px;
-      font-weight: 600;
-      color: #e74c3c;
-    }
-  
+</div>
+<!-- End Product Detail Section -->
+
+<style>
+  /* Base styles for title, price, and description */
+  .product-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+
+  .product-description {
+    font-size: 18px;
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+
+  .product-price h3 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #e74c3c;
+    margin-top: 10px;
+  }
+
+  /* Product Image */
+
+
+  /* Features List */
+  .text-primary {
+    color: #3498db !important;
+  }
+
+  h4 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 30px;
+    color: #3498db;
+  }
+
+  .list-unstyled li {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  /* Action Buttons */
+  .add-to-cart-btn, .buy-now-btn {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+
+  .add-to-cart-btn {
+    background-color: #3498db;
+    border: none;
+  }
+
+  .buy-now-btn {
+    background-color: #27ae60;
+    border: none;
+  }
+
+  .add-to-cart-btn:hover, .buy-now-btn:hover {
+    transform: translateY(-3px);
+  }
+
+  .add-to-cart-btn:focus, .buy-now-btn:focus {
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
+  }
+
+  .add-to-cart-btn:hover {
+    background-color: #2980b9;
+  }
+
+  .buy-now-btn:hover {
+    background-color: #2ecc71;
+  }
+
+  /* Button Icons */
+  .icon-shopping-cart, .icon-check-circle {
+    margin-right: 10px;
+  }
+
+  /* Responsive Image and Layout */
+  @media (max-width: 768px) {
     .product-image-container img {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease-in-out;
+      max-height: 400px;
+      object-fit: contain;
     }
-  
-    .product-image-container img:hover {
-      transform: scale(1.05);
+
+    .product-title {
+      font-size: 28px;
     }
-  
-    .quantity {
-      margin-bottom: 20px;
-    }
-  
-    .quantity-btn {
-      font-size: 20px;
-      padding: 8px 15px;
-      border-radius: 50%;
-    }
-  
-    .add-to-cart-btn, .buy-now-btn {
-      font-size: 18px;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 8px;
-      transition: transform 0.2s ease, background-color 0.3s ease;
-    }
-  
-    .add-to-cart-btn:hover, .buy-now-btn:hover {
-      transform: translateY(-2px);
-      background-color: #3498db;
-    }
-  
-    .buy-now-btn:hover {
-      background-color: #e74c3c;
-    }
-  
-    .product-title, .product-price {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    h4 {
+
+    .product-price h3 {
       font-size: 22px;
-      color: #3498db;
-      font-weight: 700;
-      margin-top: 30px;
     }
-  
-    .list-unstyled li {
-      font-size: 18px;
-      color: #555;
-      margin-bottom: 10px;
+
+    .add-to-cart-btn, .buy-now-btn {
+      font-size: 16px;
+      padding: 12px 20px;
     }
-  
-    .quantity input {
-      text-align: center;
-      font-size: 18px;
-    }
-  </style>
+  }
+</style>
+
   
 
     <!-- foote section -->

@@ -21,9 +21,16 @@ def contact(request):
     template = loader.get_template('contact.html')
     return HttpResponse(template.render())
 
+# def user(request):
+#     template = loader.get_template('user_page.html')
+#     return HttpResponse(template.render())
+
 def user(request):
-    template = loader.get_template('user_page.html')
-    return HttpResponse(template.render())
+    if request.user.is_authenticated:
+        print(f"Authenticated user: {request.user}")
+    else:
+        print("User is not authenticated.")
+    return render(request, 'user_page.html')
 
 
 
@@ -240,7 +247,7 @@ def checkout(request):
                     price=item.product.price,
                 )
             
-            CartItem.objects.filter(user=request.user).delete()
+            # CartItem.objects.filter(user=request.user).delete()
             
             messages.success(request, 'Billing details updatedand order placed Succesfully!')
             return redirect ('order_summary', order_id=order.id)
@@ -282,3 +289,61 @@ def order_summary(request, order_id):
         'total_quantity': total_quantity, 
         'total_price': total_price
     })
+    
+@login_required
+def order_history(request):
+    orders = Order.objects.filter(user=request.user).order_by('order_date')
+    
+    return render(request, "order_history.html",{
+        'orders':orders
+    })
+    
+    
+    
+import razorpay
+from django.conf import settings
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
+from .models import Order  # Adjust the import based on your project structure
+
+# Initialize Razorpay client
+client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+@csrf_exempt
+def razorpay_payment(request):
+    if request.method == 'POST':
+        try:
+            # Get order details
+            order_id = request.POST.get('order_id')
+            order = Order.objects.get(id=order_id)
+            total_price = order.total_price  # Ensure this field exists in your model
+
+            # Razorpay amount should be in paise
+            amount_in_paise = int(total_price * 100)
+
+            # Create Razorpay order
+            razorpay_order = client.order.create({
+                "amount": amount_in_paise,
+                "currency": "INR",
+                "payment_capture": 1  # Auto-capture after payment
+            })
+
+            # Save Razorpay order ID to your database (optional)
+            order.razorpay_order_id = razorpay_order['id']
+            order.save()
+
+            # Return Razorpay order details to the frontend
+            return JsonResponse({
+                'razorpay_order_id': razorpay_order['id'],
+                'razorpay_key_id': settings.RAZORPAY_KEY_ID,
+                'amount': amount_in_paise,
+                'currency': "INR"
+            })
+
+        except Order.DoesNotExist:
+            return JsonResponse({'error': 'Order not found'}, status=404)
+
+    return JsonResponse({'error': 'Invalid Request'}, status=400)
+    
+

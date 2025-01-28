@@ -12,7 +12,7 @@ urlpatterns = [
     path('register/',views.register,name='register'),
     path('checkout/',views.checkout,name='checkout'),
     path('address/',views.address,name='address'),
-    path('orders/',views.orders,name='orders'),
+    path('orders/',views.order_history,name='order_history'),
     path('user_login/', views.user_login, name='user_login'),  # Login view
     path('watch/',views.watch,name='watch'),
     path('headphone/',views.headphone,name='headphone'),
@@ -29,6 +29,8 @@ urlpatterns = [
     path('update_cart/<int:cart_item_id>/',views.update_cart,name='update_cart'),
     # path('order_summary/', views.order_summary, name='order_summary'),
     path('order_summary/<int:order_id>/',views.order_summary,name='order_summary'),
+    # path('order_history/',views.order_history,name='order_history'),
+    path('payment/<int:order_id>/', views.razorpay_payment, name='razorpay_payment'),   
 
 
 ]
